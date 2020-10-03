@@ -69,18 +69,18 @@ export const PokemonInfo = styled.div`
 
   > svg {
     position: absolute;
-    right: 0px;
-    top: -15px;
+    right: 5px;
+    top: -20px;
     z-index: 5;
-    height: 210px;
-    width: 210px;
+    height: 200px;
+    width: 200px;
 
     path {
       fill: rgba(255, 255, 255, 0.2);
     }
   }
 
-  span {
+  > span {
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
@@ -96,10 +96,43 @@ export const PokemonInfo = styled.div`
     color: ${({ theme }) => theme.colors.text.white};
   }
 
-  /* img {
-    z-index: 10;
-    position: absolute;
-    right: 0px;
-    top: -15px;
-  } */
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-top: 5px;
+  }
+`;
+
+export const PokemonType = styled.div<BoxProps>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding: 8px;
+
+  background: ${({ color }) => color};
+  border-radius: 3px;
+
+  & + div {
+    margin-left: 10px;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+
+    path {
+      fill: #fff;
+    }
+  }
+
+  span {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 14px;
+    color: #ffffff;
+    margin-left: 8px;
+  }
 `;

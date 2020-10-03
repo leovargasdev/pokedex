@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 
-import { Container, Box, PokemonInfo } from './styles';
+import { Container, Box, PokemonInfo, PokemonType } from './styles';
 
 import { Pokeball } from '../../assets/patterns';
-// import pokemonTypes from '../../assets/types';
+import pokemonTypes from '../../assets/types';
 
 interface PokemonProps {
   id: string;
@@ -31,6 +31,14 @@ const Home: React.FC = () => {
           <PokemonInfo>
             <span>{`#${pokemon.id}`}</span>
             <h3>{pokemon.name}</h3>
+            <div>
+              <PokemonType color={theme.colors.type.water}>
+                {pokemonTypes.grass} <span>Grass</span>
+              </PokemonType>
+              <PokemonType color={theme.colors.type.poison}>
+                {pokemonTypes.poison} <span>Poison</span>
+              </PokemonType>
+            </div>
             <Pokeball />
           </PokemonInfo>
           <img
