@@ -1,7 +1,5 @@
 import { DefaultTheme } from 'styled-components';
 
-// import { patterns } from '../../assets';
-
 const defaultTheme: DefaultTheme = {
   title: 'default',
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 
-import { ReactComponent as PatternPokeball } from '../../assets/patterns/pokeball.svg';
-
 import { Container, Box, PokemonInfo } from './styles';
+
+import { Pokeball } from '../../assets/patterns';
+// import pokemonTypes from '../../assets/types';
 
 interface PokemonProps {
   id: string;
@@ -30,7 +31,7 @@ const Home: React.FC = () => {
           <PokemonInfo>
             <span>{`#${pokemon.id}`}</span>
             <h3>{pokemon.name}</h3>
-            <PatternPokeball />
+            <Pokeball />
           </PokemonInfo>
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
