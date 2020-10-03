@@ -3,37 +3,43 @@ import { useTheme } from 'styled-components';
 
 import { ReactComponent as PatternPokeball } from '../../assets/patterns/pokeball.svg';
 
-import { Container, Box } from './styles';
+import { Container, Box, PokemonInfo } from './styles';
+
+interface PokemonProps {
+  id: string;
+  name: string;
+  color: string;
+}
 
 const Home: React.FC = () => {
   const theme = useTheme();
 
+  const pokemons: PokemonProps[] = [
+    { id: '000', name: 'Bulbasaur', color: theme.colors.type.flying },
+    { id: '002', name: 'Ivysaur', color: theme.colors.type.rock },
+    { id: '003', name: 'Venusaur', color: theme.colors.type.dark },
+    { id: '004', name: 'Charmander', color: theme.colors.type.ground },
+    { id: '005', name: 'Bulbasaur', color: theme.colors.type.psychic },
+    { id: '006', name: 'Charmander', color: theme.colors.type.fairy },
+  ];
+
   return (
     <Container>
-      <Box color={theme.colors.type.flying}>
-        <span>aaa</span>
-        <PatternPokeball />
-      </Box>
-      <Box color={theme.colors.type.rock}>
-        <span>aaa</span>
-        <PatternPokeball />
-      </Box>
-      <Box color={theme.colors.type.dark}>
-        <span>aaa</span>
-        <PatternPokeball />
-      </Box>
-      <Box color={theme.colors.type.ground}>
-        <span>aaa</span>
-        <PatternPokeball />
-      </Box>
-      <Box color={theme.colors.type.psychic}>
-        <span>aaa</span>
-        <PatternPokeball />
-      </Box>
-      <Box color={theme.colors.type.fairy}>
-        <span>aaa</span>
-        <PatternPokeball />
-      </Box>
+      {pokemons.map((pokemon, index) => (
+        <Box key={pokemon.id} color={pokemon.color}>
+          <PokemonInfo>
+            <span>{`#${pokemon.id}`}</span>
+            <h3>{pokemon.name}</h3>
+            <PatternPokeball />
+          </PokemonInfo>
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
+              index + 1
+            }.svg`}
+            alt="Sprit pokemon"
+          />
+        </Box>
+      ))}
     </Container>
   );
 };
