@@ -1,11 +1,17 @@
-import React, { useState, useEffect, SVGProps, useMemo } from 'react';
+import React, { useState, useEffect, SVGProps } from 'react';
 import { useTheme } from 'styled-components';
-
-import { Container, PokemonInfo, PokemonType } from './styles';
-import api from '../../services/api';
 
 import pokemonTypes from '../../assets/types';
 import { Pokeball } from '../../assets/patterns';
+
+import {
+  Container,
+  Pokemon,
+  PokemonNumber,
+  PokemonName,
+  PokemonType,
+} from './styles';
+import api from '../../services/api';
 
 interface PokemonTypesProps {
   name: string;
@@ -38,8 +44,8 @@ const CardPokemon: React.FC<{ name: string }> = ({ name }) => {
 
       setPokemon({
         id,
-        backgroundColor: theme.colors.type[backgroundColor],
-        image: sprites.other.dream_world.front_default,
+        backgroundColor: theme.colors.backgroundType[backgroundColor],
+        image: sprites.other['official-artwork'].front_default,
         type: types.map((pokemonType: TypePokemonResponse) => ({
           name: pokemonType.type.name,
           icon: pokemonTypes[pokemonType.type.name],
@@ -51,9 +57,9 @@ const CardPokemon: React.FC<{ name: string }> = ({ name }) => {
 
   return (
     <Container key={pokemon.id} color={pokemon.backgroundColor}>
-      <PokemonInfo>
-        <span>#{pokemon.id}</span>
-        <h3>{name}</h3>
+      <Pokemon>
+        <PokemonNumber>#{pokemon.id}</PokemonNumber>
+        <PokemonName>{name}</PokemonName>
         {pokemon.type && (
           <div>
             {pokemon.type.map(pokemonType => (
@@ -64,7 +70,7 @@ const CardPokemon: React.FC<{ name: string }> = ({ name }) => {
           </div>
         )}
         <Pokeball />
-      </PokemonInfo>
+      </Pokemon>
       <img src={pokemon.image} alt={`Imagem do pokémon ${name}`} />
     </Container>
   );
