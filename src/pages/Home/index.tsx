@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from 'styled-components';
 
+import CardPokemon from '../../components/CardPokemon';
 import { Container, Box, PokemonInfo, PokemonType } from './styles';
 
 import { Pokeball } from '../../assets/patterns';
 import pokemonTypes from '../../assets/types';
+import api from '../../services/api';
 
 interface PokemonProps {
   id: string;
@@ -13,20 +15,26 @@ interface PokemonProps {
 }
 
 const Home: React.FC = () => {
+  const NUMBER_POKEMONS = 12;
   const theme = useTheme();
+  const [pokemons, setPokemons] = useState<PokemonProps[]>([]);
 
-  const pokemons: PokemonProps[] = [
-    { id: '000', name: 'Bulbasaur', color: theme.colors.type.flying },
-    { id: '002', name: 'Ivysaur', color: theme.colors.type.rock },
-    { id: '003', name: 'Venusaur', color: theme.colors.type.dark },
-    { id: '004', name: 'Charmander', color: theme.colors.type.ground },
-    { id: '005', name: 'Bulbasaur', color: theme.colors.type.psychic },
-    { id: '006', name: 'Charmander', color: theme.colors.type.fairy },
-  ];
+  useEffect(() => {
+    api
+      .get(`/pokemon`, {
+        params: {
+          limit: NUMBER_POKEMONS,
+        },
+      })
+      .then(response => setPokemons(response.data.results));
+  }, [NUMBER_POKEMONS]);
 
   return (
     <Container>
-      {pokemons.map((pokemon, index) => (
+      {pokemons.map(pokemon => (
+        <CardPokemon key={pokemon.name} name={pokemon.name} />
+      ))}
+      {/* {pokemons.map((pokemon, index) => (
         <Box key={pokemon.id} color={pokemon.color}>
           <PokemonInfo>
             <span>{`#${pokemon.id}`}</span>
@@ -48,7 +56,7 @@ const Home: React.FC = () => {
             alt="Sprit pokemon"
           />
         </Box>
-      ))}
+      ))} */}
     </Container>
   );
 };
