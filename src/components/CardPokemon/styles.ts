@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 interface BoxProps {
   color: string;
 }
 
-export const Container = styled.div<BoxProps>`
+export const Container = styled(Link)<BoxProps>`
   display: flex;
   position: relative;
 

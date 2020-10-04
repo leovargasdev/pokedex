@@ -60,7 +60,7 @@ const CardPokemon: React.FC<{ name: string }> = ({ name }) => {
   }, [name, theme.colors]);
 
   return (
-    <Container key={pokemon.id} color={pokemon.backgroundColor}>
+    <Container to={`pokemon/${name}`} color={pokemon.backgroundColor}>
       <Pokemon>
         <PokemonNumber>#{pokemon.id}</PokemonNumber>
         <PokemonName>{name}</PokemonName>
