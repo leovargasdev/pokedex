@@ -40,7 +40,11 @@ const CardPokemon: React.FC<{ name: string }> = ({ name }) => {
     api.get(`/pokemon/${name}`).then(response => {
       const { id, types, sprites } = response.data;
 
-      const backgroundColor: keyof typeof pokemonTypes = types[0].type.name;
+      let backgroundColor: keyof typeof pokemonTypes = types[0].type.name;
+
+      if (backgroundColor === 'normal' && types.length > 1) {
+        backgroundColor = types[1].type.name;
+      }
 
       setPokemon({
         id,

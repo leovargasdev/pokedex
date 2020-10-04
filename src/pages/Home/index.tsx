@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 import CardPokemon from '../../components/CardPokemon';
-import { Container } from './styles';
-
+import InputSearch from '../../components/InputSearch';
+import { Pokeball } from '../../assets/patterns';
 import api from '../../services/api';
+
+import { Container, Pokemons } from './styles';
 
 interface PokemonProps {
   id: string;
   name: string;
-  color: string;
 }
 
 const Home: React.FC = () => {
-  const NUMBER_POKEMONS = 12;
+  const NUMBER_POKEMONS = 24;
   const [pokemons, setPokemons] = useState<PokemonProps[]>([]);
+  const [pokemonSearch, setPokemonSearch] = useState('');
 
   useEffect(() => {
     api
@@ -27,9 +29,16 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      {pokemons.map(pokemon => (
-        <CardPokemon key={pokemon.name} name={pokemon.name} />
-      ))}
+      <Pokeball />
+      <h1>Pokédex</h1>
+
+      <InputSearch value={pokemonSearch} onChange={setPokemonSearch} />
+
+      <Pokemons>
+        {pokemons.map(pokemon => (
+          <CardPokemon key={pokemon.name} name={pokemon.name} />
+        ))}
+      </Pokemons>
     </Container>
   );
 };
