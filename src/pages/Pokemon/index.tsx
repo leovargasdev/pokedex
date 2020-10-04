@@ -14,6 +14,9 @@ import {
   PokemonNumber,
   PokemonName,
   PokemonType,
+  SectionsName,
+  ContentSection,
+  SectionAbout,
 } from './styles';
 
 interface RouteParams {
@@ -50,6 +53,7 @@ interface TypePokemonResponse {
 const Pokemon: React.FC = () => {
   const { colors } = useTheme();
   const { name } = useParams() as RouteParams;
+  const [numberActiveSection, setNumberActiveSection] = useState(1);
   const [pokemon, setPokemon] = useState({} as PokemonProps);
   const [backgroundColor, setBackgroundColor] = useState<
     keyof typeof pokemonTypes
@@ -110,7 +114,31 @@ const Pokemon: React.FC = () => {
           </div>
         </Header>
 
-        <span>aaa</span>
+        <SectionsName active={numberActiveSection}>
+          <button type="button" onClick={() => setNumberActiveSection(1)}>
+            About
+          </button>
+          <button type="button" onClick={() => setNumberActiveSection(2)}>
+            Stats
+          </button>
+          <button type="button" onClick={() => setNumberActiveSection(3)}>
+            Evolution
+          </button>
+        </SectionsName>
+        <ContentSection>
+          <SectionAbout color={colors.type[backgroundColor]}>
+            <p>
+              Him rendered may attended concerns jennings reserved now.
+              Sympathize did now preference unpleasing mrs few. Mrs for hour
+              game room want are fond dare. For detract charmed add talking age.
+              Shy resolution instrument unreserved man few. She did open find
+              pain some out.
+            </p>
+
+            <h3>Pokédex Data</h3>
+            <h3>Training</h3>
+          </SectionAbout>
+        </ContentSection>
       </Content>
     </Container>
   );

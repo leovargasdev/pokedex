@@ -5,15 +5,11 @@ interface ElementColorProps {
 }
 
 export const Container = styled.div<ElementColorProps>`
-  flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
   position: relative;
-
   width: 100%;
   height: 100vh;
+
   background: ${props => props.color};
 
   h1 {
@@ -23,10 +19,10 @@ export const Container = styled.div<ElementColorProps>`
 
 export const BackgroundNamePokemon = styled.div`
   position: absolute;
-  width: 100vw;
   left: 0;
   right: 0;
   top: 0;
+  z-index: 2;
 
   h1 {
     font-weight: bold;
@@ -45,21 +41,24 @@ export const BackgroundNamePokemon = styled.div`
 `;
 
 export const Content = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+
   padding: 9vw 0;
-  z-index: 2;
 `;
 
-export const Header = styled.div`
+export const Header = styled.header`
   position: relative;
 
   display: flex;
   flex-direction: row;
   align-items: center;
+  align-self: center;
 
   > img {
+    z-index: 3;
     height: 350px;
     width: 350px;
   }
@@ -81,7 +80,7 @@ export const Header = styled.div`
 `;
 
 export const PokemonCircle = styled.span<ElementColorProps>`
-  z-index: -1;
+  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
@@ -142,5 +141,59 @@ export const PokemonType = styled.div<ElementColorProps>`
     color: #ffffff;
     margin-left: 8px;
     text-transform: capitalize;
+  }
+`;
+
+export const SectionsName = styled.div<{ active: number }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  margin-top: 80px;
+
+  button {
+    background: none;
+    border: 0;
+    outline: 0;
+
+    font-size: 35px;
+    line-height: 38px;
+    color: ${({ theme }) => theme.colors.text.white};
+    opacity: 0.4;
+  }
+
+  button:nth-child(${props => props.active}) {
+    opacity: 1;
+  }
+`;
+
+export const ContentSection = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  background: white;
+  border-radius: 65px 65px 0 0;
+  margin-top: 10px;
+  padding: 40px;
+`;
+
+export const SectionAbout = styled.section<ElementColorProps>`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h3,
+  p {
+    font-size: 28px;
+    line-height: 31px;
+  }
+
+  p {
+    color: #747476;
+  }
+
+  h3 {
+    margin-top: 20px;
+    color: ${props => props.color};
   }
 `;
