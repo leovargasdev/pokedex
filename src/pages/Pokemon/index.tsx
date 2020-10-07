@@ -17,6 +17,7 @@ import {
   SectionsName,
   ContentSection,
   SectionAbout,
+  SectionAboutContent,
 } from './styles';
 
 interface RouteParams {
@@ -135,8 +136,51 @@ const Pokemon: React.FC = () => {
               pain some out.
             </p>
 
-            <h3>Pokédex Data</h3>
-            <h3>Training</h3>
+            <SectionAboutContent>
+              <div>
+                <h3>Pokédex Data</h3>
+
+                <ul>
+                  <li>
+                    <strong>Species</strong> <span>Seed Pokémon</span>
+                  </li>
+                  <li>
+                    <strong>Height</strong> <span>0.7m</span>
+                  </li>
+                  <li>
+                    <strong>Weight</strong> <span>6.9kg</span>
+                  </li>
+                  <li>
+                    <strong>Abilities</strong> <span>1. Overgrow</span>
+                  </li>
+                  <li>
+                    <strong>Weaknesses</strong> <span>6.9kg</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3>Training</h3>
+
+                <ul>
+                  <li>
+                    <strong>EV Yield</strong> <span>1 Special Attack</span>
+                  </li>
+                  <li>
+                    <strong>Catch Rate</strong> <span>45</span>
+                  </li>
+                  <li>
+                    <strong>Base Friendship</strong> <span>70(normal)</span>
+                  </li>
+                  <li>
+                    <strong>Base Exp</strong> <span>64</span>
+                  </li>
+                  <li>
+                    <strong>Growth Rate</strong> <span>Medium Slow</span>
+                  </li>
+                </ul>
+              </div>
+            </SectionAboutContent>
           </SectionAbout>
         </ContentSection>
       </Content>

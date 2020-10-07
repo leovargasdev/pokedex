@@ -180,7 +180,7 @@ export const ContentSection = styled.div`
 export const SectionAbout = styled.section<ElementColorProps>`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
 
   h3,
   p {
@@ -189,11 +189,53 @@ export const SectionAbout = styled.section<ElementColorProps>`
   }
 
   p {
-    color: #747476;
+    color: ${({ theme }) => theme.colors.text.gray};
   }
 
   h3 {
-    margin-top: 20px;
     color: ${props => props.color};
+  }
+`;
+
+export const SectionAboutContent = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-evenly;
+  margin-top: 20px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      list-style: none;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 15px;
+
+        strong {
+          font-weight: 500;
+          font-size: 22px;
+          line-height: 24px;
+          color: ${({ theme }) => theme.colors.text.black};
+
+          width: 180px;
+        }
+
+        span {
+          font-size: 24px;
+          line-height: 21px;
+          color: ${({ theme }) => theme.colors.text.gray};
+        }
+      }
+    }
   }
 `;
