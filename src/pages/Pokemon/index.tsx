@@ -1,9 +1,13 @@
-import React, { useState, useEffect, SVGProps } from 'react';
+import React, { useState, useEffect, SVGProps, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import api from '../../services/api';
 import pokemonTypes from '../../assets/types';
+
+import About from './screens/About';
+import Evolution from './screens/Evolution';
+import Stats from './screens/Stats';
 
 import {
   Container,
@@ -16,26 +20,25 @@ import {
   PokemonType,
   SectionsName,
   ContentSection,
-  SectionAbout,
-  SectionAboutContent,
 } from './styles';
 
 interface RouteParams {
   name: string;
 }
 
-interface PokemonTypesProps {
-  name: string;
+export interface PokemonTypesProps {
+  name?: string;
   icon: SVGProps<SVGSVGElement>;
   color: string;
 }
 
-interface PokemonProps {
+export interface PokemonProps {
   id: number;
   number: string;
   image: string;
-  height: number;
-  weight: number;
+  specie: string;
+  height: string;
+  weight: string;
   stats: {
     hp: number;
     attack: number;
@@ -54,6 +57,7 @@ interface TypePokemonResponse {
 const Pokemon: React.FC = () => {
   const { colors } = useTheme();
   const { name } = useParams() as RouteParams;
+
   const [numberActiveSection, setNumberActiveSection] = useState(1);
   const [pokemon, setPokemon] = useState({} as PokemonProps);
   const [backgroundColor, setBackgroundColor] = useState<
@@ -62,7 +66,15 @@ const Pokemon: React.FC = () => {
 
   useEffect(() => {
     api.get(`/pokemon/${name}`).then(response => {
-      const { id, weight, height, stats, sprites, types } = response.data;
+      const {
+        id,
+        weight,
+        height,
+        stats,
+        sprites,
+        types,
+        species,
+      } = response.data;
       setBackgroundColor(types[0].type.name);
 
       if (types[0].type.name === 'normal' && types.length > 1) {
@@ -73,8 +85,9 @@ const Pokemon: React.FC = () => {
         id,
         number: `#${'000'.substr(id.toString().length)}${id}`,
         image: sprites.other['official-artwork'].front_default,
-        weight,
-        height,
+        weight: `${weight / 10} kg`,
+        specie: species.name,
+        height: `${height / 10} m`,
         stats: {
           hp: stats[0].base_stat,
           attack: stats[1].base_stat,
@@ -89,6 +102,20 @@ const Pokemon: React.FC = () => {
       });
     });
   }, [name, colors]);
+
+  const screenSelected = useMemo(() => {
+    const color = colors.type[backgroundColor];
+    switch (numberActiveSection) {
+      case 1:
+        return <About pokemon={pokemon} colorText={color} />;
+      case 2:
+        return <Stats />;
+      case 3:
+        return <Evolution />;
+      default:
+        return <></>;
+    }
+  }, [numberActiveSection, colors, backgroundColor, pokemon]);
 
   return (
     <Container color={colors.backgroundType[backgroundColor]}>
@@ -126,63 +153,8 @@ const Pokemon: React.FC = () => {
             Evolution
           </button>
         </SectionsName>
-        <ContentSection>
-          <SectionAbout color={colors.type[backgroundColor]}>
-            <p>
-              Him rendered may attended concerns jennings reserved now.
-              Sympathize did now preference unpleasing mrs few. Mrs for hour
-              game room want are fond dare. For detract charmed add talking age.
-              Shy resolution instrument unreserved man few. She did open find
-              pain some out.
-            </p>
 
-            <SectionAboutContent>
-              <div>
-                <h3>Pokédex Data</h3>
-
-                <ul>
-                  <li>
-                    <strong>Species</strong> <span>Seed Pokémon</span>
-                  </li>
-                  <li>
-                    <strong>Height</strong> <span>0.7m</span>
-                  </li>
-                  <li>
-                    <strong>Weight</strong> <span>6.9kg</span>
-                  </li>
-                  <li>
-                    <strong>Abilities</strong> <span>1. Overgrow</span>
-                  </li>
-                  <li>
-                    <strong>Weaknesses</strong> <span>6.9kg</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h3>Training</h3>
-
-                <ul>
-                  <li>
-                    <strong>EV Yield</strong> <span>1 Special Attack</span>
-                  </li>
-                  <li>
-                    <strong>Catch Rate</strong> <span>45</span>
-                  </li>
-                  <li>
-                    <strong>Base Friendship</strong> <span>70(normal)</span>
-                  </li>
-                  <li>
-                    <strong>Base Exp</strong> <span>64</span>
-                  </li>
-                  <li>
-                    <strong>Growth Rate</strong> <span>Medium Slow</span>
-                  </li>
-                </ul>
-              </div>
-            </SectionAboutContent>
-          </SectionAbout>
-        </ContentSection>
+        <ContentSection>{screenSelected}</ContentSection>
       </Content>
     </Container>
   );

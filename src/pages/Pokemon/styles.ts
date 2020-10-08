@@ -239,3 +239,24 @@ export const SectionAboutContent = styled.div`
     }
   }
 `;
+
+export const Weaknesse = styled.p`
+  display: flex;
+  background: ${props => props.color};
+  border-radius: 6px;
+
+  width: 34px;
+  height: 34px;
+
+  svg {
+    margin: auto;
+    width: 18px;
+    height: 18px;
+
+    path {
+      fill: #fff;
+    }
+  }
+
+  margin-right: 6px;
+`;
