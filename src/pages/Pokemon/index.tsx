@@ -44,6 +44,8 @@ export interface PokemonProps {
     attack: number;
     defense: number;
     speed: number;
+    specialAttack: number;
+    specialDefense: number;
   };
   type: PokemonTypesProps[];
 }
@@ -58,7 +60,7 @@ const Pokemon: React.FC = () => {
   const { colors } = useTheme();
   const { name } = useParams() as RouteParams;
 
-  const [numberActiveSection, setNumberActiveSection] = useState(1);
+  const [numberActiveSection, setNumberActiveSection] = useState(2);
   const [pokemon, setPokemon] = useState({} as PokemonProps);
   const [backgroundColor, setBackgroundColor] = useState<
     keyof typeof pokemonTypes
@@ -92,6 +94,8 @@ const Pokemon: React.FC = () => {
           hp: stats[0].base_stat,
           attack: stats[1].base_stat,
           defense: stats[2].base_stat,
+          specialAttack: stats[3].base_stat,
+          specialDefense: stats[4].base_stat,
           speed: stats[5].base_stat,
         },
         type: types.map((pokemonType: TypePokemonResponse) => ({
@@ -109,7 +113,7 @@ const Pokemon: React.FC = () => {
       case 1:
         return <About pokemon={pokemon} colorText={color} />;
       case 2:
-        return <Stats />;
+        return pokemon.stats && <Stats stats={pokemon.stats} color={color} />;
       case 3:
         return <Evolution />;
       default:
