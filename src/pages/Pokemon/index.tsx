@@ -60,7 +60,7 @@ const Pokemon: React.FC = () => {
   const { colors } = useTheme();
   const { name } = useParams() as RouteParams;
 
-  const [numberActiveSection, setNumberActiveSection] = useState(2);
+  const [numberActiveSection, setNumberActiveSection] = useState(3);
   const [pokemon, setPokemon] = useState({} as PokemonProps);
   const [backgroundColor, setBackgroundColor] = useState<
     keyof typeof pokemonTypes
@@ -115,11 +115,11 @@ const Pokemon: React.FC = () => {
       case 2:
         return pokemon.stats && <Stats stats={pokemon.stats} color={color} />;
       case 3:
-        return <Evolution />;
+        return <Evolution image={pokemon.image} name={name} />;
       default:
         return <></>;
     }
-  }, [numberActiveSection, colors, backgroundColor, pokemon]);
+  }, [numberActiveSection, colors, backgroundColor, pokemon, name]);
 
   return (
     <Container color={colors.backgroundType[backgroundColor]}>
