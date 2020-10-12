@@ -21,6 +21,13 @@ interface PokemonEvolvesProps {
   level: number;
 }
 
+interface PokemonAAA {
+  name: string;
+  image: string;
+  number: string;
+  level: number;
+}
+
 interface EvolvesProps {
   species: {
     name: string;
@@ -30,9 +37,9 @@ interface EvolvesProps {
 }
 
 const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
-  // const [pokemonsFamily, setPokemonsFamily] = useState<PokemonEvolvesProps[]>(
-  //   [],
-  // );
+  const [pokemonsFamily, setPokemonsFamily] = useState<PokemonEvolvesProps[]>(
+    [],
+  );
 
   // Criando uma função recursiva para navegar na árvore de evolução do pokémon
   // A cada chamada é extraído o nome da espécie e concatenado com a lista dos nomes.
@@ -43,7 +50,10 @@ const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
       evolution_details,
     }: EvolvesProps): PokemonEvolvesProps[] => {
       let namesPokemons: PokemonEvolvesProps[] = [
-        { name: species.name, level: 0 },
+        {
+          name: species.name,
+          level: 0,
+        },
       ];
       if (evolution_details.length)
         namesPokemons[0].level = evolution_details[0].min_level;
@@ -60,21 +70,6 @@ const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
     [],
   );
 
-  const handleEnvolvesPokemon = async (
-    species: PokemonEvolvesProps[],
-  ): Promise<void> => {
-    const aa = await species.map(async specie => {
-      const response = await api.get(`/pokemon/${specie.name}`);
-      const { id, sprites } = response.data;
-      return {
-        ...specie,
-        number: `#${'000'.substr(id.toString().length)}${id}`,
-        image: sprites.other['official-artwork'].front_default,
-      };
-    });
-    console.log(aa);
-  };
-
   useEffect(() => {
     // Na rota /pokemon-species é retornado os atributos da espécie do Pokémon
     api.get(`/pokemon-species/${name}`).then(responseSpecies => {
@@ -83,11 +78,39 @@ const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
       const url = responseSpecies.data.evolution_chain.url.split('v2')[1];
       api.get(url).then(responseEvolution => {
         const species = handleNameSpecies(responseEvolution.data.chain);
-        handleEnvolvesPokemon(species);
-        // setPokemonsFamily(species.filter(pokemonName => pokemonName !== name));
+        setPokemonsFamily(species);
       });
     });
   }, [name, handleNameSpecies]);
+
+  useEffect(() => {
+    if (pokemonsFamily.length) {
+      const urlsAxios = pokemonsFamily.map(p => api.get(`/pokemon/${p.name}`));
+
+      Promise.all([...urlsAxios]).then(responses => {
+        const result: any[] = [];
+
+        for (let k = 0; k < responses.length; k += 1) {
+          const { id, sprites } = responses[k].data;
+          if (k === 0) {
+            const next = {
+              number: `#${'000'.substr(id.toString().length)}${id}`,
+              image: sprites.other['official-artwork'].front_default,
+            };
+            result.push({ prev: next, level: 0, next });
+          } else {
+            const prev = result[k - 1].next;
+            const next = {
+              number: `#${'000'.substr(id.toString().length)}${id}`,
+              image: sprites.other['official-artwork'].front_default,
+            };
+            result.push({ prev, level: 0, next });
+          }
+        }
+        console.log(result);
+      });
+    }
+  }, [pokemonsFamily]);
 
   return (
     <Container>
