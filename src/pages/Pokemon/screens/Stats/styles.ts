@@ -4,14 +4,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-`;
+  justify-content: space-evenly;
 
-export const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
-  padding: 10px 100px 0;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1600px;
+  height: 100%;
+  padding: 20px 0;
 `;
 
 export const Row = styled.div`
@@ -19,10 +18,6 @@ export const Row = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
-  & + div {
-    margin-top: 12px;
-  }
 
   strong {
     font-weight: 500;

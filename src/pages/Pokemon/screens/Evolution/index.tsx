@@ -5,8 +5,7 @@ import { Pokeball } from '../../../../assets/patterns';
 import api from '../../../../services/api';
 
 import {
-  Container,
-  EvolutionRow,
+  SectionEvolution,
   EvolutionPokemon,
   EvolutionPokemonImage,
 } from './styles';
@@ -99,37 +98,33 @@ const Evolution: React.FC<{ name: string; color: string }> = ({
   }, [pokemonsFamily]);
 
   return (
-    <Container>
-      <h1>Evolution Chart</h1>
-
-      <EvolutionRow>
-        {evolvesPokemon.length ? (
-          evolvesPokemon.map((evolves, index) => (
-            <React.Fragment key={evolves.level}>
-              {index !== 0 && (
-                <EvolutionPokemon>
-                  <FaLongArrowAltRight size={80} color={color} />
-                  <p style={{ color }}>(Level {evolves.level})</p>
-                </EvolutionPokemon>
-              )}
+    <SectionEvolution>
+      {evolvesPokemon.length ? (
+        evolvesPokemon.map((evolves, index) => (
+          <React.Fragment key={evolves.level}>
+            {index !== 0 && (
               <EvolutionPokemon>
-                <EvolutionPokemonImage to={`/pokemon/${evolves.name}`}>
-                  <Pokeball />
-                  <img
-                    src={evolves.image}
-                    alt={`Imagem do pokémon ${evolves.name}`}
-                  />
-                </EvolutionPokemonImage>
-                <p>{evolves.number}</p>
-                <h4>{evolves.name}</h4>
+                <FaLongArrowAltRight size={80} color="rgba(0, 0, 0, 0.06)" />
+                <p>(Level {evolves.level})</p>
               </EvolutionPokemon>
-            </React.Fragment>
-          ))
-        ) : (
-          <h1 style={{ textAlign: 'center' }}>Carregando...</h1>
-        )}
-      </EvolutionRow>
-    </Container>
+            )}
+            <EvolutionPokemon>
+              <EvolutionPokemonImage to={`/pokemon/${evolves.name}`}>
+                <Pokeball />
+                <img
+                  src={evolves.image}
+                  alt={`Imagem do pokémon ${evolves.name}`}
+                />
+              </EvolutionPokemonImage>
+              <p>{evolves.number}</p>
+              <h4>{evolves.name}</h4>
+            </EvolutionPokemon>
+          </React.Fragment>
+        ))
+      ) : (
+        <h1 style={{ textAlign: 'center' }}>Carregando...</h1>
+      )}
+    </SectionEvolution>
   );
 };
 

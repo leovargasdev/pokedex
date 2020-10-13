@@ -147,7 +147,7 @@ const Pokemon: React.FC = () => {
           </div>
         </Header>
 
-        <SectionsName active={2}>
+        <SectionsName>
           {['about', 'stats', 'evolution'].map(nameSection => (
             <SectionsNameButton
               key={nameSection}

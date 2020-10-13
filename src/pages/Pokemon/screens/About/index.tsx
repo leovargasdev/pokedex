@@ -69,7 +69,6 @@ const About: React.FC<AboutProps> = ({ pokemon, colorText }) => {
       <SectionAboutContent>
         <div>
           <h3>Pokédex Data</h3>
-
           <ul>
             <li>
               <strong>Species</strong> <span>{pokemon.specie}</span>
@@ -79,9 +78,6 @@ const About: React.FC<AboutProps> = ({ pokemon, colorText }) => {
             </li>
             <li>
               <strong>Weight</strong> <span>{pokemon.weight}</span>
-            </li>
-            <li>
-              <strong>Abilities</strong> <span>1. Overgrow</span>
             </li>
             <li>
               <strong>Weaknesses</strong>
@@ -99,22 +95,16 @@ const About: React.FC<AboutProps> = ({ pokemon, colorText }) => {
           <h3>Training</h3>
 
           <ul>
-            {/* <li>
-              <strong>EV Yield</strong> <span>1 Special Attack</span>
-            </li> */}
             <li>
-              <strong>Catch Rate</strong>{' '}
+              <strong>Catch Rate</strong>
               <span>{pokemonSpecie.capture_rate}</span>
             </li>
             <li>
-              <strong>Base Friendship</strong>{' '}
+              <strong>Base Friendship</strong>
               <span>{pokemonSpecie.base_happiness}</span>
             </li>
-            {/* <li>
-              <strong>Base Exp</strong> <span>64</span>
-            </li> */}
             <li>
-              <strong>Growth Rate</strong>{' '}
+              <strong>Growth Rate</strong>
               <span>{pokemonSpecie.growth_rate}</span>
             </li>
           </ul>

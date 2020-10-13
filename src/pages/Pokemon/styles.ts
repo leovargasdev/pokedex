@@ -45,17 +45,16 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-
-  padding: 9vw 0;
 `;
 
-export const Header = styled.header`
+export const Header = styled.div`
   position: relative;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   align-self: center;
+  margin-top: 14vh;
 
   > img {
     z-index: 3;
@@ -144,30 +143,22 @@ export const PokemonType = styled.div<ElementColorProps>`
   }
 `;
 
-export const SectionsName = styled.div<{ active: number }>`
+export const SectionsName = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-
-  margin-top: 80px;
-
-  /* button {
-
-  }
-
-  button:nth-child(${props => props.active}) {
-    opacity: 1;
-  } */
+  margin: auto 0 10px;
 `;
 
 export const ContentSection = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   background: white;
-  border-radius: 65px 65px 0 0;
-  margin-top: 10px;
-  padding: 40px;
+  height: 320px;
+  padding: 0 40px;
+  border-radius: 45px 45px 0 0;
 `;
 
 export const SectionsNameButton = styled.button<{ active: boolean }>`

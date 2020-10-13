@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Content, Row, BarStatus } from './styles';
+import { Container, Row, BarStatus } from './styles';
 
 export interface PokemonProps {
   stats: {
@@ -26,20 +26,17 @@ const Stats: React.FC<PokemonProps> = ({ stats, color }) => {
 
   return (
     <Container>
-      <h1>Stats</h1>
-      <Content>
-        {statsContent &&
-          statsContent.map(stat => (
-            <Row key={stat.field}>
-              <strong>{stat.title}</strong>
-              <span>{stats[stat.field] || 1}</span>
-              <BarStatus percentage={stats[stat.field] || 1} color={color}>
-                <span />
-              </BarStatus>
-              <span>100</span>
-            </Row>
-          ))}
-      </Content>
+      {statsContent &&
+        statsContent.map(stat => (
+          <Row key={stat.field}>
+            <strong>{stat.title}</strong>
+            <span>{stats[stat.field] || 1}</span>
+            <BarStatus percentage={stats[stat.field] || 1} color={color}>
+              <span />
+            </BarStatus>
+            <span>100</span>
+          </Row>
+        ))}
     </Container>
   );
 };

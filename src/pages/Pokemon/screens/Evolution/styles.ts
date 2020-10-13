@@ -1,28 +1,15 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
-  h1 {
-    /* margin-bottom: 10px; */
-  }
-`;
-
-export const EvolutionRow = styled.div`
+export const SectionEvolution = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 
-  padding: 0 200px;
-  margin: 5px 0 0;
-
-  /* svg {
-    color: rgba(0, 0, 0, 0.9);
-  } */
+  width: 100%;
+  height: 100%;
+  padding: 20px 0;
 `;
 
 export const EvolutionPokemon = styled.div`
@@ -34,14 +21,14 @@ export const EvolutionPokemon = styled.div`
     font-weight: 500;
     font-size: 20px;
     line-height: 22px;
-    color: ${({ theme }) => theme.colors.text.black};
+    color: ${({ theme }) => theme.colors.text.gray};
   }
 
   h4 {
     text-transform: capitalize;
     font-size: 23px;
     line-height: 26px;
-    color: ${({ theme }) => theme.colors.text.gray};
+    color: ${({ theme }) => theme.colors.text.black};
   }
 `;
 
