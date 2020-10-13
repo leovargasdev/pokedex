@@ -20,6 +20,7 @@ import {
   PokemonType,
   SectionsName,
   ContentSection,
+  SectionsNameButton,
 } from './styles';
 
 interface RouteParams {
@@ -60,7 +61,7 @@ const Pokemon: React.FC = () => {
   const { colors } = useTheme();
   const { name } = useParams() as RouteParams;
 
-  const [numberActiveSection, setNumberActiveSection] = useState(3);
+  const [nameSectionActive, setNameSectionActive] = useState('evolution');
   const [pokemon, setPokemon] = useState({} as PokemonProps);
   const [backgroundColor, setBackgroundColor] = useState<
     keyof typeof pokemonTypes
@@ -109,17 +110,17 @@ const Pokemon: React.FC = () => {
 
   const screenSelected = useMemo(() => {
     const color = colors.type[backgroundColor];
-    switch (numberActiveSection) {
-      case 1:
+    switch (nameSectionActive) {
+      case 'about':
         return <About pokemon={pokemon} colorText={color} />;
-      case 2:
+      case 'stats':
         return pokemon.stats && <Stats stats={pokemon.stats} color={color} />;
-      case 3:
+      case 'evolution':
         return <Evolution name={name} color={color} />;
       default:
         return <></>;
     }
-  }, [numberActiveSection, colors, backgroundColor, pokemon, name]);
+  }, [nameSectionActive, colors, backgroundColor, pokemon, name]);
 
   return (
     <Container color={colors.backgroundType[backgroundColor]}>
@@ -146,16 +147,17 @@ const Pokemon: React.FC = () => {
           </div>
         </Header>
 
-        <SectionsName active={numberActiveSection}>
-          <button type="button" onClick={() => setNumberActiveSection(1)}>
-            About
-          </button>
-          <button type="button" onClick={() => setNumberActiveSection(2)}>
-            Stats
-          </button>
-          <button type="button" onClick={() => setNumberActiveSection(3)}>
-            Evolution
-          </button>
+        <SectionsName active={2}>
+          {['about', 'stats', 'evolution'].map(nameSection => (
+            <SectionsNameButton
+              key={nameSection}
+              type="button"
+              onClick={() => setNameSectionActive(nameSection)}
+              active={nameSection === nameSectionActive}
+            >
+              {nameSection}
+            </SectionsNameButton>
+          ))}
         </SectionsName>
 
         <ContentSection>{screenSelected}</ContentSection>

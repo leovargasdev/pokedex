@@ -106,6 +106,12 @@ const Evolution: React.FC<{ name: string; color: string }> = ({
         {evolvesPokemon.length ? (
           evolvesPokemon.map((evolves, index) => (
             <React.Fragment key={evolves.level}>
+              {index !== 0 && (
+                <EvolutionPokemon>
+                  <FaLongArrowAltRight size={80} color={color} />
+                  <p style={{ color }}>(Level {evolves.level})</p>
+                </EvolutionPokemon>
+              )}
               <EvolutionPokemon>
                 <EvolutionPokemonImage to={`/pokemon/${evolves.name}`}>
                   <Pokeball />
@@ -117,13 +123,6 @@ const Evolution: React.FC<{ name: string; color: string }> = ({
                 <p>{evolves.number}</p>
                 <h4>{evolves.name}</h4>
               </EvolutionPokemon>
-
-              {evolvesPokemon.length - 1 !== index && (
-                <EvolutionPokemon>
-                  <FaLongArrowAltRight size={80} color={color} />
-                  <p style={{ color }}>(Level {evolves.level})</p>
-                </EvolutionPokemon>
-              )}
             </React.Fragment>
           ))
         ) : (
