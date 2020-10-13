@@ -115,7 +115,7 @@ const Pokemon: React.FC = () => {
       case 2:
         return pokemon.stats && <Stats stats={pokemon.stats} color={color} />;
       case 3:
-        return <Evolution image={pokemon.image} name={name} />;
+        return <Evolution name={name} color={color} />;
       default:
         return <></>;
     }

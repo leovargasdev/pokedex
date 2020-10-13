@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -6,7 +7,7 @@ export const Container = styled.div`
   align-items: stretch;
 
   h1 {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
 `;
 
@@ -17,11 +18,11 @@ export const EvolutionRow = styled.div`
   justify-content: space-around;
 
   padding: 0 200px;
-  margin: 10px 0;
+  margin: 5px 0 0;
 
-  > svg {
-    color: rgba(0, 0, 0, 0.3);
-  }
+  /* svg {
+    color: rgba(0, 0, 0, 0.9);
+  } */
 `;
 
 export const EvolutionPokemon = styled.div`
@@ -37,19 +38,20 @@ export const EvolutionPokemon = styled.div`
   }
 
   h4 {
+    text-transform: capitalize;
     font-size: 23px;
     line-height: 26px;
     color: ${({ theme }) => theme.colors.text.gray};
   }
 `;
 
-export const EvolutionPokemonImage = styled.div`
+export const EvolutionPokemonImage = styled(Link)`
   position: relative;
   display: flex;
 
   width: 180px;
   height: 180px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 
   img {
     margin: auto;

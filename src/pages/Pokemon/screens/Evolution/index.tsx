@@ -11,21 +11,11 @@ import {
   EvolutionPokemonImage,
 } from './styles';
 
-interface EvolutionProps {
-  name: string;
-  image: string;
-}
-
 interface PokemonEvolvesProps {
   name: string;
   level: number;
-}
-
-interface PokemonAAA {
-  name: string;
-  image: string;
-  number: string;
-  level: number;
+  image?: string;
+  number?: string;
 }
 
 interface EvolvesProps {
@@ -36,12 +26,17 @@ interface EvolvesProps {
   evolves_to: EvolvesProps[];
 }
 
-const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
+const Evolution: React.FC<{ name: string; color: string }> = ({
+  name,
+  color,
+}) => {
   const [pokemonsFamily, setPokemonsFamily] = useState<PokemonEvolvesProps[]>(
     [],
   );
 
-  const [evolvesPokemon, setEvolvesPokemon] = useState<any[]>([]);
+  const [evolvesPokemon, setEvolvesPokemon] = useState<PokemonEvolvesProps[]>(
+    [],
+  );
 
   // Criando uma função recursiva para navegar na árvore de evolução do pokémon
   // A cada chamada é extraído o nome da espécie e concatenado com a lista dos nomes.
@@ -90,26 +85,15 @@ const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
       const urlsAxios = pokemonsFamily.map(p => api.get(`/pokemon/${p.name}`));
 
       Promise.all([...urlsAxios]).then(responses => {
-        const result: any[] = [];
-
-        for (let k = 0; k < responses.length; k += 1) {
-          const { id, sprites } = responses[k].data;
-          if (k === 0) {
-            const next = {
-              number: `#${'000'.substr(id.toString().length)}${id}`,
-              image: sprites.other['official-artwork'].front_default,
-            };
-            result.push({ prev: next, level: 0, next });
-          } else {
-            const prev = result[k - 1].next;
-            const next = {
-              number: `#${'000'.substr(id.toString().length)}${id}`,
-              image: sprites.other['official-artwork'].front_default,
-            };
-            result.push({ prev, level: pokemonsFamily[k].level, next });
-          }
-        }
-        setEvolvesPokemon(result.slice(1));
+        const result = responses.map((response, index) => {
+          const { id, sprites } = response.data;
+          return {
+            ...pokemonsFamily[index],
+            number: `#${'000'.substr(id.toString().length)}${id}`,
+            image: sprites.other['official-artwork'].front_default,
+          };
+        });
+        setEvolvesPokemon(result);
       });
     }
   }, [pokemonsFamily]);
@@ -118,39 +102,34 @@ const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
     <Container>
       <h1>Evolution Chart</h1>
 
-      {evolvesPokemon.length ? (
-        evolvesPokemon.map(evolves => (
-          <EvolutionRow key={evolves.level}>
-            <EvolutionPokemon>
-              <EvolutionPokemonImage>
-                <Pokeball />
-                <img
-                  src={evolves.prev.image}
-                  alt={`Imagem do pokémon ${name}`}
-                />
-              </EvolutionPokemonImage>
-              <p>{evolves.prev.number}</p>
-              <h4>{name}</h4>
-            </EvolutionPokemon>
+      <EvolutionRow>
+        {evolvesPokemon.length ? (
+          evolvesPokemon.map((evolves, index) => (
+            <React.Fragment key={evolves.level}>
+              <EvolutionPokemon>
+                <EvolutionPokemonImage to={`/pokemon/${evolves.name}`}>
+                  <Pokeball />
+                  <img
+                    src={evolves.image}
+                    alt={`Imagem do pokémon ${evolves.name}`}
+                  />
+                </EvolutionPokemonImage>
+                <p>{evolves.number}</p>
+                <h4>{evolves.name}</h4>
+              </EvolutionPokemon>
 
-            <FaLongArrowAltRight size={80} />
-
-            <EvolutionPokemon>
-              <EvolutionPokemonImage>
-                <Pokeball />
-                <img
-                  src={evolves.next.image}
-                  alt={`Imagem do pokémon ${name}`}
-                />
-              </EvolutionPokemonImage>
-              <p>{evolves.next.number}</p>
-              <h4>{name}</h4>
-            </EvolutionPokemon>
-          </EvolutionRow>
-        ))
-      ) : (
-        <h1 style={{ textAlign: 'center' }}>Carregando...</h1>
-      )}
+              {evolvesPokemon.length - 1 !== index && (
+                <EvolutionPokemon>
+                  <FaLongArrowAltRight size={80} color={color} />
+                  <p style={{ color }}>(Level {evolves.level})</p>
+                </EvolutionPokemon>
+              )}
+            </React.Fragment>
+          ))
+        ) : (
+          <h1 style={{ textAlign: 'center' }}>Carregando...</h1>
+        )}
+      </EvolutionRow>
     </Container>
   );
 };
