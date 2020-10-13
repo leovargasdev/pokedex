@@ -41,6 +41,8 @@ const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
     [],
   );
 
+  const [evolvesPokemon, setEvolvesPokemon] = useState<any[]>([]);
+
   // Criando uma função recursiva para navegar na árvore de evolução do pokémon
   // A cada chamada é extraído o nome da espécie e concatenado com a lista dos nomes.
   const handleNameSpecies = useCallback(
@@ -104,10 +106,10 @@ const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
               number: `#${'000'.substr(id.toString().length)}${id}`,
               image: sprites.other['official-artwork'].front_default,
             };
-            result.push({ prev, level: 0, next });
+            result.push({ prev, level: pokemonsFamily[k].level, next });
           }
         }
-        console.log(result);
+        setEvolvesPokemon(result.slice(1));
       });
     }
   }, [pokemonsFamily]);
@@ -116,27 +118,39 @@ const Evolution: React.FC<EvolutionProps> = ({ image, name }) => {
     <Container>
       <h1>Evolution Chart</h1>
 
-      <EvolutionRow>
-        <EvolutionPokemon>
-          <EvolutionPokemonImage>
-            <Pokeball />
-            <img src={image} alt={`Imagem do pokémon ${name}`} />
-          </EvolutionPokemonImage>
-          <p>#001</p>
-          <h4>{name}</h4>
-        </EvolutionPokemon>
+      {evolvesPokemon.length ? (
+        evolvesPokemon.map(evolves => (
+          <EvolutionRow key={evolves.level}>
+            <EvolutionPokemon>
+              <EvolutionPokemonImage>
+                <Pokeball />
+                <img
+                  src={evolves.prev.image}
+                  alt={`Imagem do pokémon ${name}`}
+                />
+              </EvolutionPokemonImage>
+              <p>{evolves.prev.number}</p>
+              <h4>{name}</h4>
+            </EvolutionPokemon>
 
-        <FaLongArrowAltRight size={80} />
+            <FaLongArrowAltRight size={80} />
 
-        <EvolutionPokemon>
-          <EvolutionPokemonImage>
-            <Pokeball />
-            <img src={image} alt={`Imagem do pokémon ${name}`} />
-          </EvolutionPokemonImage>
-          <p>#001</p>
-          <h5>{name}</h5>
-        </EvolutionPokemon>
-      </EvolutionRow>
+            <EvolutionPokemon>
+              <EvolutionPokemonImage>
+                <Pokeball />
+                <img
+                  src={evolves.next.image}
+                  alt={`Imagem do pokémon ${name}`}
+                />
+              </EvolutionPokemonImage>
+              <p>{evolves.next.number}</p>
+              <h4>{name}</h4>
+            </EvolutionPokemon>
+          </EvolutionRow>
+        ))
+      ) : (
+        <h1 style={{ textAlign: 'center' }}>Carregando...</h1>
+      )}
     </Container>
   );
 };
