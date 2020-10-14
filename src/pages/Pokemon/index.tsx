@@ -14,7 +14,7 @@ import {
   BackgroundNamePokemon,
   Content,
   Header,
-  PokemonCircle,
+  PokemonLoader,
   PokemonNumber,
   PokemonName,
   PokemonType,
@@ -131,7 +131,13 @@ const Pokemon: React.FC = () => {
       <Content>
         <Header>
           <img src={pokemon.image} alt={`Imagem do pokémon ${name}`} />
-          <PokemonCircle color={colors.backgroundType[backgroundColor]} />
+          <PokemonLoader
+            colorBackground={colors.backgroundType[backgroundColor]}
+            colorType={colors.type[backgroundColor]}
+          >
+            <span />
+          </PokemonLoader>
+          {/* <PokemonCircle color={colors.backgroundType[backgroundColor]} /> */}
           <div>
             <PokemonNumber>{pokemon.number}</PokemonNumber>
             <PokemonName>{name}</PokemonName>
