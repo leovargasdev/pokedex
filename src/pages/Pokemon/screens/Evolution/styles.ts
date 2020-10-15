@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import media from 'styled-media-query';
 
 export const SectionEvolution = styled.div`
   display: flex;
@@ -60,6 +61,16 @@ export const EvolutionPokemonImage = styled(Link)`
       fill: rgba(0, 0, 0, 0.06);
     }
   }
+
+  ${media.lessThan('huge')`
+    width: 140px;
+    height: 140px;
+
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  `};
 
   &:hover {
     img {

@@ -100,7 +100,7 @@ const Evolution: React.FC<{ name: string; color: string }> = ({
   return (
     <SectionEvolution>
       {evolvesPokemon.length ? (
-        evolvesPokemon.map((evolves, index) => (
+        evolvesPokemon.slice(0, 6).map((evolves, index) => (
           <React.Fragment key={evolves.level}>
             {index !== 0 && (
               <EvolutionPokemon>

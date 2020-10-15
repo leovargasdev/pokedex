@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 export const SectionAbout = styled.section<{ colorText: string }>`
   display: flex;
@@ -10,6 +11,14 @@ export const SectionAbout = styled.section<{ colorText: string }>`
     font-size: 28px;
     line-height: 31px;
   }
+
+  ${media.lessThan('huge')`
+    h3,
+    p {
+      font-size: 20px;
+      line-height: 23px;
+    }
+  `};
 
   p {
     color: ${({ theme }) => theme.colors.text.gray};
@@ -61,6 +70,20 @@ export const SectionAboutContent = styled.div`
       }
     }
   }
+
+  ${media.lessThan('huge')`
+    div ul li {
+      margin-top: 8px;
+      strong {
+        font-size: 18px;
+        line-height: 20px;
+      }
+
+      span {
+        font-size: 20px;
+      }
+    }
+  `};
 `;
 
 export const Weaknesse = styled.p`

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import media from 'styled-media-query';
 
 interface ElementColorProps {
   color: string;
@@ -14,6 +16,21 @@ export const Container = styled.div<ElementColorProps>`
 
   h1 {
     color: ${props => props.color};
+  }
+`;
+
+export const GoBack = styled(Link)`
+  position: fixed;
+  top: 6vw;
+  left: 1vw;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.text.white};
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -38,6 +55,12 @@ export const BackgroundNamePokemon = styled.div`
     -webkit-background-clip: text;
     -webkit-text-stroke: 4px transparent;
   }
+
+  ${media.lessThan('huge')`
+    h1 {
+      font-size: 120px;
+    }
+  `};
 `;
 
 export const Content = styled.div`
@@ -79,6 +102,19 @@ export const Header = styled.div`
       margin-top: 3px;
     }
   }
+
+  ${media.lessThan('huge')`
+    margin-top: 12vh;
+
+    > img {
+      height: 180px;
+      width: 180px;
+    }
+
+    > div {
+      padding-top: 20px;
+    }
+  `};
 `;
 
 // export const PokemonCircle = styled.span<ElementColorProps>`
@@ -90,11 +126,22 @@ export const Header = styled.div`
 //   width: 350px;
 
 //   border: double 10px transparent;
-//   border-radius: 175px;
+//   border-radius: 50%;
 //   background-image: ${props =>
-//     `linear-gradient(${props.color}, ${props.color}), linear-gradient(160deg, ${props.color} 30%, rgba(255, 255, 255, 0.4) 100%)`};
+//     `linear-gradient(${props.color}, ${props.color}), linear-gradient(160deg, ${props.color} 30%, rgba(255, 255, 255, 0.6) 100%)`};
 //   background-origin: border-box;
 //   background-clip: content-box, border-box;
+//   animation: animate 3s ease infinite;
+//   /* transform: rotate(180deg); */
+
+//   @keyframes animate {
+//     0% {
+//       transform: rotate(240deg);
+//     }
+//     100% {
+//       transform: rotate(600deg);
+//     }
+//   }
 // `;
 
 interface PokemonLoaderProps {
@@ -103,20 +150,27 @@ interface PokemonLoaderProps {
 }
 
 export const PokemonLoader = styled.div<PokemonLoaderProps>`
-  z-index: 1;
   position: relative;
-  /* background: black; */
+  z-index: 1;
+
   height: 350px;
   width: 350px;
   border-radius: 50px;
+
+  ${media.lessThan('huge')`
+    height: 180px;
+    width: 180px;
+    border-radius: 80px;
+  `};
+
   animation: animate 3s ease infinite;
 
   @keyframes animate {
     0% {
-      transform: rotate(0deg);
+      transform: rotate(240deg);
     }
     100% {
-      transform: rotate(360deg);
+      transform: rotate(600deg);
     }
   }
 
@@ -130,7 +184,7 @@ export const PokemonLoader = styled.div<PokemonLoaderProps>`
     background: ${props => `linear-gradient(
       to top,
       transparent,
-      ${props.colorType}CC
+      ${props.colorType}
     )`};
     background-size: 175px 315px;
     background-repeat: no-repeat;
@@ -141,20 +195,15 @@ export const PokemonLoader = styled.div<PokemonLoaderProps>`
   &::after {
     content: '';
     position: absolute;
-    top: 4px;
+    top: 1px;
     left: 50%;
     transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background: ${props => props.colorType};
+    width: 9px;
+    height: 9px;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     z-index: 30;
-    box-shadow: 0 0 1px ${props => props.colorType},
-      0 0 2px ${props => props.colorType}, 0 0 3px ${props => props.colorType},
-      0 0 4px ${props => props.colorType}, 0 0 5px ${props => props.colorType},
-      0 0 6px ${props => props.colorType}, 0 0 7px ${props => props.colorType},
-      0 0 8px ${props => props.colorType}, 0 0 9px ${props => props.colorType},
-      0 0 10px ${props => props.colorType};
+    box-shadow: 0px 0px 40px 6px #fff;
   }
 
   span {
@@ -174,6 +223,11 @@ export const PokemonNumber = styled.span`
   letter-spacing: 2px;
   line-height: 32px;
   color: rgba(23, 23, 27, 0.6);
+
+  ${media.lessThan('huge')`
+    font-size: 22px;
+    line-height: 24px;
+  `};
 `;
 
 export const PokemonName = styled.span`
@@ -182,6 +236,11 @@ export const PokemonName = styled.span`
   line-height: 65px;
   text-transform: capitalize;
   color: ${({ theme }) => theme.colors.text.white};
+
+  ${media.lessThan('huge')`
+    font-size: 35px;
+    line-height: 40px;
+  `};
 `;
 
 export const PokemonType = styled.div<ElementColorProps>`
@@ -215,6 +274,18 @@ export const PokemonType = styled.div<ElementColorProps>`
     margin-left: 8px;
     text-transform: capitalize;
   }
+
+  ${media.lessThan('huge')`
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    span {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  `};
 `;
 
 export const SectionsName = styled.div`
@@ -233,12 +304,19 @@ export const ContentSection = styled.div`
   height: 320px;
   padding: 0 40px;
   border-radius: 45px 45px 0 0;
+
+  ${media.lessThan('huge')`
+    padding: 0 20px;
+  `};
 `;
 
 export const SectionsNameButton = styled.button<{ active: boolean }>`
-  background: none;
+  position: relative;
+
   border: 0;
   outline: 0;
+  width: 170px;
+  background: none;
 
   font-size: 35px;
   line-height: 38px;
@@ -246,4 +324,19 @@ export const SectionsNameButton = styled.button<{ active: boolean }>`
   opacity: ${props => (props.active ? 1 : 0.4)};
 
   text-transform: capitalize;
+
+  svg {
+    position: absolute;
+    top: -34px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 0;
+    width: 170px;
+    height: auto;
+    path {
+      fill: rgba(255, 255, 255, 0.08);
+    }
+  }
 `;

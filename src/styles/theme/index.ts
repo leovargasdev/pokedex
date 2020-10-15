@@ -48,7 +48,7 @@ const defaultTheme: DefaultTheme = {
       white: '#FFFFFF',
       input: '#F2F2F2',
       pressedInput: '#E2E2E2',
-      modal: '#000000 .25',
+      modal: '#000000',
     },
     text: {
       white: '#FFFFFF',

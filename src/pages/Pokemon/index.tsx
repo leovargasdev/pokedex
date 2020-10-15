@@ -1,9 +1,11 @@
 import React, { useState, useEffect, SVGProps, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
+import { FaChevronLeft } from 'react-icons/fa';
 
 import api from '../../services/api';
 import pokemonTypes from '../../assets/types';
+import { Pokeball } from '../../assets/patterns';
 
 import About from './screens/About';
 import Evolution from './screens/Evolution';
@@ -11,6 +13,7 @@ import Stats from './screens/Stats';
 
 import {
   Container,
+  GoBack,
   BackgroundNamePokemon,
   Content,
   Header,
@@ -62,7 +65,7 @@ const Pokemon: React.FC = () => {
   const { colors } = useTheme();
   const { name } = useParams() as RouteParams;
 
-  const [nameSectionActive, setNameSectionActive] = useState('evolution');
+  const [nameSectionActive, setNameSectionActive] = useState('about');
   const [pokemon, setPokemon] = useState({} as PokemonProps);
   const [backgroundColor, setBackgroundColor] = useState<
     keyof typeof pokemonTypes
@@ -128,6 +131,9 @@ const Pokemon: React.FC = () => {
 
   return (
     <Container color={colors.backgroundType[backgroundColor]}>
+      <GoBack to="/">
+        <FaChevronLeft size={50} />
+      </GoBack>
       <BackgroundNamePokemon>
         <h1>{name}</h1>
       </BackgroundNamePokemon>
@@ -137,7 +143,7 @@ const Pokemon: React.FC = () => {
           <img src={pokemon.image} alt={`Imagem do pokémon ${name}`} />
           <PokemonLoader
             colorBackground={colors.backgroundType[backgroundColor]}
-            colorType={colors.type[backgroundColor]}
+            colorType="rgba(255,255,255,0.6)"
           >
             <span />
           </PokemonLoader>
@@ -166,6 +172,7 @@ const Pokemon: React.FC = () => {
               active={nameSection === nameSectionActive}
             >
               {nameSection}
+              {nameSection === nameSectionActive && <Pokeball />}
             </SectionsNameButton>
           ))}
         </SectionsName>

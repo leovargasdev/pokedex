@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 40px 80px;
+  padding: 30px 80px;
 
   h1 {
     font-weight: bold;
@@ -29,6 +29,28 @@ export const Container = styled.div`
 
     path {
       fill: rgba(0, 0, 0, 0.03);
+    }
+  }
+
+  button {
+    height: 50px;
+    width: 50%;
+    margin: 30px auto 0;
+    border: 0;
+    outline: 0;
+    background: #5a92a5;
+    border-radius: 4px;
+
+    color: ${({ theme }) => theme.colors.text.white};
+    text-transform: uppercase;
+    font-size: 20px;
+    line-height: 25px;
+    opacity: 0.8;
+    transition: all linear 0.2s;
+
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
     }
   }
 
