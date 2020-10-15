@@ -83,9 +83,9 @@ export const Header = styled.div`
 
 // export const PokemonCircle = styled.span<ElementColorProps>`
 //   z-index: 1;
-//   position: absolute;
+//   /* position: absolute;
 //   top: 0;
-//   left: 0;
+//   left: 0; */
 //   height: 350px;
 //   width: 350px;
 
@@ -130,7 +130,7 @@ export const PokemonLoader = styled.div<PokemonLoaderProps>`
     background: ${props => `linear-gradient(
       to top,
       transparent,
-      ${props.colorType}99
+      ${props.colorType}CC
     )`};
     background-size: 175px 315px;
     background-repeat: no-repeat;

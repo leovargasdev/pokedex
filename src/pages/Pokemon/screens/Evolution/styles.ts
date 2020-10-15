@@ -45,6 +45,7 @@ export const EvolutionPokemonImage = styled(Link)`
     width: 140px;
     height: 140px;
     z-index: 2;
+    transition: transform 0.4s ease;
   }
 
   svg {
@@ -53,9 +54,19 @@ export const EvolutionPokemonImage = styled(Link)`
     top: 0;
     height: inherit;
     width: initial;
+    transition: transform 0.8s ease;
 
     path {
       fill: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.15);
+    }
+    svg {
+      transform: rotate(180deg);
     }
   }
 `;

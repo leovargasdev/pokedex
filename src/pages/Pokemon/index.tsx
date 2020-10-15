@@ -15,6 +15,7 @@ import {
   Content,
   Header,
   PokemonLoader,
+  // PokemonCircle,
   PokemonNumber,
   PokemonName,
   PokemonType,
@@ -78,6 +79,7 @@ const Pokemon: React.FC = () => {
         types,
         species,
       } = response.data;
+
       setBackgroundColor(types[0].type.name);
 
       if (types[0].type.name === 'normal' && types.length > 1) {
@@ -87,7 +89,9 @@ const Pokemon: React.FC = () => {
       setPokemon({
         id,
         number: `#${'000'.substr(id.toString().length)}${id}`,
-        image: sprites.other['official-artwork'].front_default,
+        image:
+          sprites.other['official-artwork'].front_default ||
+          sprites.front_default,
         weight: `${weight / 10} kg`,
         specie: species.name,
         height: `${height / 10} m`,
