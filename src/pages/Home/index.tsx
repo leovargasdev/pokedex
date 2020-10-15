@@ -17,15 +17,36 @@ const Home: React.FC = () => {
   const [pokemons, setPokemons] = useState<PokemonProps[]>([]);
   const [pokemonSearch, setPokemonSearch] = useState('');
 
+  // useEffect(() => {
+  //   api
+  //     .get(`/pokemon`, {
+  //       params: {
+  //         limit: NUMBER_POKEMONS,
+  //       },
+  //     })
+  //     .then(response => setPokemons(response.data.results));
+  // }, [NUMBER_POKEMONS]);
+
   useEffect(() => {
-    api
-      .get(`/pokemon`, {
-        params: {
-          limit: NUMBER_POKEMONS,
-        },
-      })
-      .then(response => setPokemons(response.data.results));
-  }, [NUMBER_POKEMONS]);
+    if (pokemonSearch.length >= 2) {
+      api.get('/pokemon?limit=750').then(response => {
+        setPokemonSearch(pokemonSearch.toLocaleLowerCase());
+        // Validado em quais dos nomes dos pokémons consta parte da string digitada pelo usuário.
+        const pokemonsSearch = response.data.results.filter(
+          ({ name }: PokemonProps) => name.includes(pokemonSearch),
+        );
+        setPokemons(pokemonsSearch);
+      });
+    } else {
+      api
+        .get(`/pokemon`, {
+          params: {
+            limit: NUMBER_POKEMONS,
+          },
+        })
+        .then(response => setPokemons(response.data.results));
+    }
+  }, [pokemonSearch]);
 
   return (
     <Container>
