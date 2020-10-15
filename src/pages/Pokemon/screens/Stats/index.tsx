@@ -31,7 +31,10 @@ const Stats: React.FC<PokemonProps> = ({ stats, color }) => {
           <Row key={stat.field}>
             <strong>{stat.title}</strong>
             <span>{stats[stat.field] || 1}</span>
-            <BarStatus percentage={stats[stat.field] || 1} color={color}>
+            <BarStatus
+              percentage={stats[stat.field] < 100 ? stats[stat.field] : 100}
+              color={color}
+            >
               <span />
             </BarStatus>
             <span>100</span>

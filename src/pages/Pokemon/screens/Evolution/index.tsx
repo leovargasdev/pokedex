@@ -105,7 +105,7 @@ const Evolution: React.FC<{ name: string; color: string }> = ({
             {index !== 0 && (
               <EvolutionPokemon>
                 <FaLongArrowAltRight size={80} color="rgba(0, 0, 0, 0.06)" />
-                <p>(Level {evolves.level})</p>
+                <p>(Level {evolves.level || 'null'})</p>
               </EvolutionPokemon>
             )}
             <EvolutionPokemon>

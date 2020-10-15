@@ -75,7 +75,9 @@ const CardPokemon: React.FC<{ name: string }> = ({ name }) => {
         )}
         <Pokeball />
       </Pokemon>
-      <img src={pokemon.image} alt={`Imagem do pokémon ${name}`} />
+      {pokemon.image && (
+        <img src={pokemon.image} alt={`Imagem do pokémon ${name}`} />
+      )}
     </Container>
   );
 };

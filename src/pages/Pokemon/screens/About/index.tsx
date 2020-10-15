@@ -60,10 +60,14 @@ const About: React.FC<AboutProps> = ({ pokemon, colorText }) => {
   return (
     <SectionAbout colorText={colorText}>
       <p>
-        Him rendered may attended concerns jennings reserved now. Sympathize did
+        Texto aleatório para preencher um campo com palavras aleatórias para um
+        pokémon aleatório. Tal texto foi escrito e pensado de forma aleatória,
+        seu único objetivo é preencher essa informação faltante com palavras
+        aleatórias até que se obtenha uma boa quantia de caracteres aleatórios.
+        {/* Him rendered may attended concerns jennings reserved now. Sympathize did
         now preference unpleasing mrs few. Mrs for hour game room want are fond
         dare. For detract charmed add talking age. Shy resolution instrument
-        unreserved man few. She did open find pain some out.
+        unreserved man few. She did open find pain some out. */}
       </p>
 
       <SectionAboutContent>
