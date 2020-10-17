@@ -6,17 +6,17 @@ interface BoxProps {
 }
 
 export const Container = styled(Link)<BoxProps>`
-  display: flex;
   position: relative;
 
-  width: inherit;
+  display: flex;
   height: 180px;
-  background: ${({ color }) => color};
+  width: inherit;
+
+  border-radius: 6px;
+  background: ${props => props.color};
   box-shadow: 1px 3px 12px 0 rgba(0, 0, 0, 0.3);
 
-  /* transform: scale(0.98); */
   transition: all ease 0.5s;
-  border-radius: 6px;
 
   > img {
     position: absolute;
@@ -33,7 +33,6 @@ export const Container = styled(Link)<BoxProps>`
 
   &:hover {
     cursor: pointer;
-    /* transform: scale(1); */
     border-radius: 15px;
 
     > img {
@@ -53,24 +52,19 @@ export const Pokemon = styled.div`
 
   position: relative;
   padding-left: 30px;
-  overflow-x: hidden;
-  overflow-y: hidden;
 
   > svg {
     position: absolute;
     right: 5px;
-    top: -20px;
-    z-index: 5;
-    height: 200px;
-    width: 200px;
-
-    /* filter: opacity(8%); */
+    top: 0;
+    height: 180px;
+    width: 180px;
 
     path {
-      fill: rgba(255, 255, 255, 0.1);
+      fill: rgba(255, 255, 255, 0.2);
     }
   }
-
+  /* Seção dos types do pokémon */
   div {
     display: flex;
     flex-direction: row;
@@ -81,16 +75,16 @@ export const Pokemon = styled.div`
 `;
 
 export const PokemonNumber = styled.span`
-  font-weight: bold;
   font-size: 20px;
+  font-weight: bold;
   letter-spacing: 2px;
-  line-height: 22px;
-  color: ${({ theme }) => theme.colors.text.number};
+  /* O número 99 aplica uma opacidade de 60% no hex da cor */
+  color: ${({ theme }) => theme.colors.text.number}99;
 `;
 
 export const PokemonName = styled.span`
-  font-weight: bold;
   font-size: 40px;
+  font-weight: bold;
   line-height: 45px;
   text-transform: capitalize;
   color: ${({ theme }) => theme.colors.text.white};
@@ -103,7 +97,7 @@ export const PokemonType = styled.div<BoxProps>`
 
   padding: 8px;
 
-  background: ${({ color }) => color};
+  background: ${props => props.color};
   border-radius: 3px;
 
   & + div {
@@ -115,16 +109,17 @@ export const PokemonType = styled.div<BoxProps>`
     height: 18px;
 
     path {
-      fill: #fff;
+      fill: ${({ theme }) => theme.colors.text.white};
     }
   }
 
   span {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 14px;
-    color: #ffffff;
     margin-left: 8px;
+
+    color: ${({ theme }) => theme.colors.text.white};
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 14px;
     text-transform: capitalize;
   }
 `;
