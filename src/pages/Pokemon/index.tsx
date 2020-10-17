@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { FaChevronLeft } from 'react-icons/fa';
 
-import api from '../../services/api';
-import pokemonTypes from '../../assets/types';
-import { Pokeball } from '../../assets/patterns';
+import api from '~/services/api';
+import pokemonTypes from '~/assets/types';
+import { Pokeball } from '~/assets/patterns';
 
 import About from './screens/About';
 import Evolution from './screens/Evolution';

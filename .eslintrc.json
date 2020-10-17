@@ -55,7 +55,11 @@
     },
     "settings": {
       "import/resolver": {
-        "typescript": {}
+        "typescript": {},
+        "babel-plugin-root-import": {
+          "rootPathPrefix": "~",
+          "rootPathSuffix": "src"
+        }
       }
     }
   }

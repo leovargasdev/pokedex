@@ -1,8 +1,9 @@
 import React, { useState, useEffect, SVGProps } from 'react';
 import { useTheme } from 'styled-components';
 
-import pokemonTypes from '../../assets/types';
-import { Pokeball } from '../../assets/patterns';
+import api from '~/services/api';
+import pokemonTypes from '~/assets/types';
+import { Pokeball } from '~/assets/patterns';
 
 import {
   Container,
@@ -11,7 +12,6 @@ import {
   PokemonName,
   PokemonType,
 } from './styles';
-import api from '../../services/api';
 
 interface PokemonTypesProps {
   name: string;

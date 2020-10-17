@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 
-import { Pokeball } from '../../../../assets/patterns';
-import api from '../../../../services/api';
+import { Pokeball } from '~/assets/patterns';
+import api from '~/services/api';
 
 import {
   SectionEvolution,

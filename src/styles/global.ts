@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
-import SFProDisplayBold from '../assets/fonts/sf-pro-display-bold.ttf';
-import SFProDisplayMedium from '../assets/fonts/sf-pro-display-medium.ttf';
-import SFProDisplayRegular from '../assets/fonts/sf-pro-display-regular.ttf';
+import SFProDisplayBold from '~/assets/fonts/sf-pro-display-bold.ttf';
+import SFProDisplayMedium from '~/assets/fonts/sf-pro-display-medium.ttf';
+import SFProDisplayRegular from '~/assets/fonts/sf-pro-display-regular.ttf';
 
 export default createGlobalStyle`
 

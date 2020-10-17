@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import CardPokemon from '../../components/CardPokemon';
-import InputSearch from '../../components/InputSearch';
-import { Pokeball } from '../../assets/patterns';
-import api from '../../services/api';
+import CardPokemon from '~/components/CardPokemon';
+import InputSearch from '~/components/InputSearch';
+import { Pokeball } from '~/assets/patterns';
+import api from '~/services/api';
 
 import { Container, Pokemons } from './styles';
 

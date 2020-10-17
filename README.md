@@ -50,6 +50,10 @@ Esse projeto é uma inspiração de um app mobile sobre pokémons, tal [layout](
 
 - Controle de paginação na listagem dos pokémons e filtro por nome.
 
+- Configuração de fonte local.
+
+- Criando tema global de cores com o `DefaultTheme` do [styled-components](https://www.styled-components.com/).
+
 ### Notas
 
 - A listagem dos pokémons foi limitada em 700, pois a partir desse número a api apresenta alguns erros nas informações do pokémon, como imagem, dados de batalha, caracteríscas, dados sobre a evolução.

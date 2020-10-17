@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 
 import { SectionAbout, SectionAboutContent, Weaknesse } from './styles';
-import pokemonTypes from '../../../../assets/types';
-import api from '../../../../services/api';
+import pokemonTypes from '~/assets/types';
+import api from '~/services/api';
 
-import { PokemonProps, PokemonTypesProps } from '../..';
+import { PokemonProps, PokemonTypesProps } from '../../index';
 
 interface AboutProps {
   pokemon: PokemonProps;
