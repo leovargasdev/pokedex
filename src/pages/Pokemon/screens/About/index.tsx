@@ -44,7 +44,7 @@ const About: React.FC<AboutProps> = ({ pokemon, colorText }) => {
   }, [pokemon.type, colors.type]);
 
   useEffect(() => {
-    if (pokemon) {
+    if (pokemon.specie) {
       api.get(`/pokemon-species/${pokemon.specie}`).then(response => {
         const { capture_rate, base_happiness, growth_rate } = response.data;
 

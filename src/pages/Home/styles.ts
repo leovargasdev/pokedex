@@ -9,10 +9,9 @@ export const Container = styled.div`
   align-items: stretch;
   padding: 30px 80px;
 
-  h1 {
+  > h1 {
     font-weight: bold;
     font-size: 50px;
-    line-height: 56px;
 
     color: ${({ theme }) => theme.colors.text.black};
   }
@@ -33,19 +32,19 @@ export const Container = styled.div`
   }
 
   button {
-    height: 50px;
-    width: 50%;
-    margin: 30px auto 0;
-    border: 0;
-    outline: 0;
-    background: #5a92a5;
-    border-radius: 4px;
-
-    color: ${({ theme }) => theme.colors.text.white};
-    text-transform: uppercase;
     font-size: 20px;
-    line-height: 25px;
+    color: ${({ theme }) => theme.colors.text.white};
+
+    width: 50%;
+    height: 50px;
+    background: #5a92a5;
+    margin: 30px auto 0;
+
+    outline: 0;
+    border: 0;
+    border-radius: 4px;
     opacity: 0.8;
+
     transition: all linear 0.2s;
 
     &:hover {
