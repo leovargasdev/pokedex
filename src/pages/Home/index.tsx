@@ -25,7 +25,6 @@ const Home: React.FC = () => {
   const handleSearchPokemons = useCallback(async () => {
     const response = await api.get(`/pokemon?limit=${NUMBER_MAX_POKEMONS_API}`);
 
-    setPokemonSearch(pokemonSearch.toLocaleLowerCase());
     // Valida nomes dos pokémons constam no valor da variável pokemonSearch
     const pokemonsSearch = response.data.results.filter(
       ({ name }: PokemonProps) => name.includes(pokemonSearch),
